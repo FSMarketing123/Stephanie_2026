@@ -462,11 +462,14 @@ const TRIP = [
          rows:[["Check-in","Thu 17 Sep, 2:00 – 9:00 PM"],["Checkout","Sun 20 Sep, 6:00 – 10:00 AM"]] },
   groups:[
     { title:"✨ Experiences", items:[
+      {n:"⚠️ How the three days now fall", d:"Thursday 17th is a travel day — checkout in Naples at 10 AM, and you can't get into Casa Lucibello until 2 PM at the earliest. Friday 18th: cooking class 11:30 to 2:30, afternoon and evening free. Saturday 19th: boat tour 9:30 to 1:30, afternoon free. Sunday 20th: checkout at 10 AM for Florence. So both full days now have a booked activity in the middle of them, and Ravello — which really wants a whole day — no longer has one. See the Ravello entry for what's still possible.", tag:"must", q:"Positano 3 day itinerary"},
       {n:"Cooking class — Fri 18 Sep, 11:30 AM", d:"Booked. Pasta, mozzarella and tiramisu with wine, in Positano. Runs 11:30 AM to about 2:30 PM — 3 hours. $141.52 for two, mobile ticket, in English. Free cancellation until 11:30 AM on Sep 17 if anything changes.", tag:"booked", q:"Positano cooking class pasta mozzarella tiramisu",
-       dist:"An 11:30 start on your first full day works well — it leaves the afternoon free and keeps Saturday clear for Ravello, which needs a whole day. Confirm the meeting point when you book; Positano classes are often up in the hills with a shuttle from town."},
-      {n:"Ravello", d:"Hill town above the coast with the famous garden villas, Villa Cimbrone and Villa Rufolo, and the best views on the whole coastline.", tag:"must",
-       dist:"Only about 15 km, but the coast road makes it 50–60 minutes by car. By bus it's a SITA to Amalfi then a change up to Ravello — closer to 1.5 hours. Worth a full day, not a quick trip."},
-      {n:"Beach club", d:"Positano's beach clubs sell loungers by the day on Spiaggia Grande and Fornillo. Reserve ahead.", q:"Positano beach club Spiaggia Grande",
+       dist:"An 11:30 start leaves your Friday afternoon and evening free. Confirm the meeting point on your voucher — Positano classes are often up in the hills with a shuttle from town rather than down by the beach."},
+      {n:"Ravello — now needs a decision", d:"Hill town above the coast with the famous garden villas, Villa Cimbrone and Villa Rufolo, and the best views on the whole coastline. With both full days now half-booked, this is the thing under pressure.", tag:"check", q:"Ravello Villa Cimbrone Villa Rufolo",
+       dist:"About 15 km, but the coast road makes it 50–60 minutes by car and closer to 1.5 hours by bus with a change at Amalfi. Your realistic options: Friday afternoon straight from the cooking class, or Saturday afternoon after the boat tour — either way arriving around 4 PM by car, which gives you a couple of hours before the villa gardens close near sunset. That is enough for Villa Rufolo and the view, not for a leisurely day. The alternative is to accept Ravello as a half-day and enjoy it, or drop it and keep both afternoons in Positano. Both are defensible — just decide before you go rather than at 3 PM on the day."},
+      {n:"Boat tour with snorkeling — Sat 19 Sep, 9:30 AM", d:"Booked. Amalfi Coast & Positano boat tour with snorkeling and drinks — 4 hours, so roughly 9:30 to 1:30. $304.28 for two. Free cancellation and unlimited rescheduling until 9:30 AM on Sep 18. Seeing this coastline from the water is the version people remember; the towns look completely different from below. Bring a swimsuit under your clothes and reef-safe sunscreen.", tag:"booked", q:"Amalfi Coast Positano boat tour snorkeling",
+       dist:"Boats leave from Spiaggia Grande, the main beach — the same downhill walk from Via Marconi, roughly 15 minutes of stairs. For a 9:30 departure leave the apartment by about 9:00, and remember the climb back up comes after four hours in the sun."},
+      {n:"Beach club", d:"Positano's beach clubs sell loungers by the day on Spiaggia Grande and Fornillo. Reserve ahead. With the boat tour on Saturday morning and the cooking class on Friday, a half day on a lounger is a realistic use of one of the free afternoons.", q:"Positano beach club Spiaggia Grande",
        dist:"Via Marconi is the upper road, so the beach is straight downhill — roughly 10–15 minutes of stairs going down and a genuinely steep climb coming back. There are local buses up if you'd rather not walk it twice."}
     ]},
     { title:"🌙 Nightlife", items:[
@@ -665,6 +668,7 @@ const EXTRAS = [
   {when:"9/16", what:"Pompeii guided tour", cost:139.18},
   {when:"9/16", what:"Naples street food tour", cost:153.32},
   {when:"9/18", what:"Positano cooking class", cost:141.52},
+  {when:"9/19", what:"Amalfi Coast boat tour", cost:304.28},
   {when:"9/21", what:"Tuscany wine safari", cost:360.88}
 ];
 const totalCost = TRIP.reduce((s,c)=> s + Number(c.stay.cost.replace(/[^0-9.]/g,'')), 0);
