@@ -198,6 +198,19 @@ details.grp[open]>summary .chev{transform:rotate(180deg)}
 .t-must{background:var(--blu-tint);color:var(--blu)}
 .t-book{background:var(--ochre-tint);color:var(--ochre)}
 .t-check{background:var(--coral-tint);color:var(--coral)}
+/* ── Phrasebook ────────────────────────────────────────────────── */
+.ph{padding:12px 15px;border-top:1px solid var(--edge)}
+.ph .en{font-size:12.5px;color:var(--soft);margin-bottom:3px}
+.ph .it{font-family:var(--serif);font-size:18px;line-height:1.25;font-weight:400}
+.ph .say{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.3px;color:var(--ochre);
+  margin-top:3px;text-transform:uppercase;
+}
+.ph .tip{margin-top:5px;font-size:12.5px;color:var(--soft);font-style:italic}
+.headsup{padding:13px 15px;border-top:1px solid var(--edge)}
+.headsup h3{margin:0;font-size:14.5px;font-weight:700}
+.headsup p{margin:5px 0 0;font-size:13.5px;color:var(--soft);line-height:1.55}
+
 .dist{
   margin-top:9px;padding:8px 10px;background:var(--ochre-tint);
   border-left:3px solid var(--ochre);font-size:12.5px;line-height:1.5;
@@ -484,6 +497,90 @@ const TRIP = [
 }
 ];
 
+/* ═══════════════════ PHRASEBOOK ═══════════════════ */
+const PHRASES = [
+{ title:"🙋 The essentials", items:[
+  {en:"Hello / good morning", it:"Buongiorno", say:"bwon-JOR-no", tip:"Use it until mid-afternoon. Say it walking into any shop or bar — not doing so reads as rude."},
+  {en:"Good evening", it:"Buonasera", say:"bwo-na-SEH-ra", tip:"Switches in around 4–5 pm."},
+  {en:"Please", it:"Per favore", say:"pehr fa-VOH-reh"},
+  {en:"Thank you", it:"Grazie", say:"GRAHT-tsyeh", tip:"Two syllables at the end — not 'grah-tsee'."},
+  {en:"You're welcome / go ahead", it:"Prego", say:"PREH-go", tip:"Does a lot of work: you're welcome, after you, what can I get you."},
+  {en:"Excuse me (to get attention)", it:"Scusi", say:"SKOO-zee"},
+  {en:"Sorry", it:"Mi dispiace", say:"mee dees-PYAH-cheh"},
+  {en:"Do you speak English?", it:"Parla inglese?", say:"PAR-la een-GLEH-zeh"},
+  {en:"I don't understand", it:"Non capisco", say:"non ka-PEE-sko"},
+  {en:"Goodbye", it:"Arrivederci", say:"ar-ree-veh-DEHR-chee"}
+]},
+{ title:"🍽️ Ordering food", items:[
+  {en:"A table for two, please", it:"Un tavolo per due, per favore", say:"oon TAH-vo-lo pehr DOO-eh"},
+  {en:"I have a reservation", it:"Ho una prenotazione", say:"oh OO-na preh-no-ta-TSYOH-neh"},
+  {en:"The menu, please", it:"Il menù, per favore", say:"eel meh-NOO"},
+  {en:"I'd like…", it:"Vorrei…", say:"vor-RAY", tip:"The single most useful phrase here. Point and say it."},
+  {en:"We'd like…", it:"Vorremmo…", say:"vor-REM-mo"},
+  {en:"What do you recommend?", it:"Cosa consiglia?", say:"KOH-za kon-SEE-lya", tip:"Ask this in a small trattoria and you'll eat well."},
+  {en:"The house wine", it:"Il vino della casa", say:"eel VEE-no DEL-la KAH-za"},
+  {en:"A glass of red / white", it:"Un bicchiere di rosso / bianco", say:"oon beek-KYEH-reh"},
+  {en:"That's all, thank you", it:"Basta così, grazie", say:"BAH-sta ko-ZEE"},
+  {en:"It was delicious", it:"Era buonissimo", say:"EH-ra bwo-NEES-see-mo"},
+  {en:"The check, please", it:"Il conto, per favore", say:"eel KON-to", tip:"They won't bring it until you ask — lingering is expected, not rushed."},
+  {en:"Can we pay by card?", it:"Possiamo pagare con la carta?", say:"pos-SYAH-mo pa-GAH-reh"}
+]},
+{ title:"💧 Water & coffee", items:[
+  {en:"Still water", it:"Acqua naturale", say:"AH-kwa na-too-RAH-leh", tip:"You'll be asked naturale o frizzante? almost every meal — this is the answer for flat water."},
+  {en:"Sparkling water", it:"Acqua frizzante", say:"AH-kwa freed-DZAN-teh"},
+  {en:"A bottle of water", it:"Una bottiglia d'acqua", say:"OO-na bot-TEE-lya DAH-kwa"},
+  {en:"Tap water", it:"Acqua del rubinetto", say:"AH-kwa del roo-bee-NET-to", tip:"Rarely served in restaurants; bottled is the norm and it's cheap."},
+  {en:"An espresso", it:"Un caffè", say:"oon kaf-FEH", tip:"Caffè means espresso. Asking for 'a coffee' gets you a small strong one."},
+  {en:"Espresso with a splash of milk", it:"Un macchiato", say:"oon mak-KYAH-to"},
+  {en:"A cappuccino", it:"Un cappuccino", say:"oon kap-poo-CHEE-no", tip:"Morning drink only. Ordering one after lunch is the classic tourist tell — harmless, but they'll notice."},
+  {en:"Standing at the bar", it:"Al banco", say:"al BAN-ko", tip:"Drinking at the bar is cheaper than sitting at a table. Often half the price."}
+]},
+{ title:"🚻 Bathroom", items:[
+  {en:"Where is the bathroom?", it:"Dov'è il bagno?", say:"do-VEH eel BAH-nyo"},
+  {en:"Is there a bathroom?", it:"C'è un bagno?", say:"cheh oon BAH-nyo"},
+  {en:"May I use the bathroom?", it:"Posso usare il bagno?", say:"POS-so oo-ZAH-reh"},
+  {en:"Ladies / Gentlemen", it:"Donne / Uomini", say:"DON-neh / WOH-mee-nee", tip:"On door signs. Also written Signore and Signori — one letter apart, so read carefully."}
+]},
+{ title:"🧭 Finding your way", items:[
+  {en:"Where is…?", it:"Dov'è…?", say:"do-VEH"},
+  {en:"Where is this restaurant?", it:"Dov'è questo ristorante?", say:"do-VEH KWES-to ree-sto-RAN-teh", tip:"Show them the name on your phone as you ask — far more effective than saying it."},
+  {en:"I'm looking for this address", it:"Cerco questo indirizzo", say:"CHEHR-ko KWES-to een-dee-REET-tso"},
+  {en:"Is it far?", it:"È lontano?", say:"eh lon-TAH-no"},
+  {en:"Can you show me on the map?", it:"Può mostrarmelo sulla mappa?", say:"pwoh mos-TRAR-meh-lo"},
+  {en:"Left / right / straight ahead", it:"A sinistra / a destra / dritto", say:"see-NEE-stra / DES-tra / DREET-to"},
+  {en:"Where is the bus stop?", it:"Dov'è la fermata dell'autobus?", say:"la fehr-MAH-ta del-OW-to-boos"},
+  {en:"One ticket, please", it:"Un biglietto, per favore", say:"oon bee-LYET-to", tip:"Buy bus tickets before boarding, at a tabaccheria, and validate on board."},
+  {en:"I'm lost", it:"Mi sono perso / persa", say:"mee SOH-no PEHR-so", tip:"Persa if you're speaking as a woman."}
+]},
+{ title:"🛒 Shops & markets", items:[
+  {en:"How much is it?", it:"Quanto costa?", say:"KWAN-to KOS-ta"},
+  {en:"Just looking, thanks", it:"Sto solo guardando, grazie", say:"stoh SOH-lo gwar-DAN-do"},
+  {en:"Can I taste it?", it:"Posso assaggiare?", say:"POS-so as-sad-JAH-reh", tip:"Fair game at food markets like Ballarò and Mercato Centrale."},
+  {en:"A little / a lot", it:"Un po' / molto", say:"oon poh / MOL-to"},
+  {en:"Do you have this in another size?", it:"Avete un'altra taglia?", say:"a-VEH-teh oo-NAL-tra TAH-lya"},
+  {en:"I'll take it", it:"Lo prendo", say:"lo PREN-do"}
+]},
+{ title:"⚠️ Allergies & help", items:[
+  {en:"I'm allergic to…", it:"Sono allergico / allergica a…", say:"SOH-no al-LEHR-jee-ko", tip:"Allergica if you're speaking as a woman. Worth writing down and showing."},
+  {en:"Without…", it:"Senza…", say:"SEN-tsa"},
+  {en:"Gluten free", it:"Senza glutine", say:"SEN-tsa GLOO-tee-neh"},
+  {en:"Does this contain nuts?", it:"Contiene frutta secca?", say:"kon-TYEH-neh FROOT-ta SEK-ka"},
+  {en:"I'm vegetarian", it:"Sono vegetariano / vegetariana", say:"veh-jeh-ta-RYAH-no"},
+  {en:"I need a pharmacy", it:"Ho bisogno di una farmacia", say:"oh bee-ZOH-nyo dee OO-na far-ma-CHEE-a", tip:"Italian pharmacists handle a lot that would need a doctor at home."},
+  {en:"Call a doctor", it:"Chiami un medico", say:"KYAH-mee oon MEH-dee-ko"},
+  {en:"Help!", it:"Aiuto!", say:"ah-YOO-to"}
+]}
+];
+
+const CUSTOMS = [
+ {h:"Coperto is not a scam", p:"Most restaurants add a €1–3 per person cover charge for bread and table service. It's printed on the menu and it's completely normal."},
+ {h:"Tipping is not expected", p:"Service is included. Rounding up or leaving a couple of euros for a very good meal is generous, not required. Never 20%."},
+ {h:"Greet the room", p:"Say buongiorno walking into a shop, bar or small restaurant, and arrivederci leaving. Skipping it is the main thing that reads as rude."},
+ {h:"Lunch and dinner run late", p:"Kitchens generally serve lunch 12:30–2:30 and dinner from 7:30 or 8. A restaurant full at 6:30 pm is usually one aimed at tourists."},
+ {h:"Sit-down costs more", p:"At cafés you pay one price standing at the bar and a higher one at a table. Both are legitimate — the menu lists both."},
+ {h:"Carry some cash", p:"Cards work nearly everywhere, but small market stalls, beach clubs and rural spots can still be cash-only."}
+];
+
 /* ═══════════════════ RENDER ═══════════════════ */
 const enc = encodeURIComponent;
 const TAGS = { must:['t-must','Top pick'], book:['t-book','Book ahead'], check:['t-check','Verify'] };
@@ -493,7 +590,8 @@ const app  = document.getElementById('app');
 const jump = document.getElementById('jump');
 
 jump.innerHTML = '<option value="">Jump to…</option>' +
-  TRIP.map((c,i)=>`<option value="${c.id}">${i+1}. ${c.name}</option>`).join('');
+  TRIP.map((c,i)=>`<option value="${c.id}">${i+1}. ${c.name}</option>`).join('') +
+  '<option value="italiano">🇮🇹 Italian phrases</option>';
 
 const totalCost = TRIP.reduce((s,c)=> s + Number(c.stay.cost.replace(/[^0-9.]/g,'')), 0);
 const totalN    = TRIP.reduce((s,c)=> s + c.stay.nights, 0);
@@ -588,6 +686,35 @@ app.innerHTML = TRIP.map((city,ci)=>{
     ${groups}
   </section>`;
 }).join('');
+
+/* ── Phrasebook section ── */
+app.insertAdjacentHTML('beforeend', `<section id="italiano">
+  <div class="city">
+    <div class="pad">
+      <div class="stopno">IT</div>
+      <div>
+        <div class="region">Say it in Italian</div>
+        <h2>Phrases that actually come up</h2>
+        <p class="intro">Enough to order, ask directions and be polite. Say the stressed CAPS a touch harder and you'll be understood.</p>
+      </div>
+    </div>
+  </div>
+  ${PHRASES.map((g,gi)=>`<details class="grp"${gi===0?' open':''}>
+      <summary><span>${g.title}</span><span class="n">${g.items.length}</span><span class="chev">▼</span></summary>
+      ${g.items.map(p=>`<div class="ph item" data-s="${(p.en+' '+p.it+' '+(p.tip||'')).toLowerCase().replace(/["“”']/g,'')}">
+          <div class="en">${p.en}</div>
+          <div class="it">${p.it}</div>
+          <div class="say">${p.say}</div>
+          ${p.tip ? `<div class="tip">${p.tip}</div>` : ''}
+        </div>`).join('')}
+    </details>`).join('')}
+  <details class="grp">
+    <summary><span>🤝 Things worth knowing</span><span class="n">${CUSTOMS.length}</span><span class="chev">▼</span></summary>
+    ${CUSTOMS.map(c=>`<div class="headsup item" data-s="${(c.h+' '+c.p).toLowerCase().replace(/["“”']/g,'')}">
+        <h3>${c.h}</h3><p>${c.p}</p>
+      </div>`).join('')}
+  </details>
+</section>`);
 
 /* ═══════════════════ BEHAVIOR ═══════════════════ */
 jump.addEventListener('change', e=>{
