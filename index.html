@@ -120,6 +120,12 @@ select:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible,b
 .leg .when{font-family:var(--mono);font-size:12px;color:var(--soft);flex:0 0 76px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .leg .where{flex:1;font-weight:600;font-size:14.5px}
 .leg .cost{font-family:var(--mono);font-size:12px;color:var(--soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+.leg.sub{background:var(--glaze)}
+.leg.sub .where,.leg.sub .cost,.leg.sub .when{font-weight:700}
+.planfoot{
+  padding:9px 14px 11px;font-size:11.5px;color:var(--soft);
+  border-top:1px solid var(--edge);line-height:1.5;
+}
 .leg.sum{border-bottom:0;background:var(--blu-tint)}
 .leg.sum .where,.leg.sum .cost{color:var(--blu);font-weight:700}
 .leg.sum .when{color:var(--blu)}
@@ -394,8 +400,8 @@ const TRIP = [
          url:"https://www.airbnb.com/rooms/1348680569126395919?guests=1&adults=1" },
   groups:[
     { title:"🏛️ Day Trips", items:[
-      {n:"Pompeii", d:"The buried Roman city. Half a day minimum; go early, there's almost no shade and September afternoons are still hot.", tag:"must",
-       dist:"About 25 km southeast. From the apartment, walk or take the metro to Napoli Garibaldi (10–15 min), then the Circumvesuviana toward Sorrento to Pompei Scavi — roughly 35–40 minutes. Budget about an hour door to gate."},
+      {n:"Pompeii guided tour — Wed 16 Sep, 8:30 AM", d:"Skip-the-line guided tour from Naples, in English, about 3 hours 30 minutes. $139.18 for two, mobile ticket. The 8:30 start is the right call — you'll be walking the site before the worst of the heat and the tour crowds. Free cancellation until 8:30 AM on Sep 15, and nothing to pay until Sep 14.", tag:"book", q:"Pompeii guided tour skip the line from Naples",
+       dist:"About 25 km southeast. Confirm whether your tour includes transport from Naples or meets you at the gate — if you're getting there yourself, it's the metro to Napoli Garibaldi then the Circumvesuviana toward Sorrento to Pompei Scavi, roughly an hour door to gate. For an 8:30 start that means leaving by about 7:15."},
       {n:"Capri — rent a boat", d:"A private or shared boat is the best way to see the island. The sea caves and swim stops are the point, not the town shopping. Book in advance.", tag:"book", q:"Capri boat rental tour",
        dist:"Ferries leave from Molo Beverello, about a 15-minute walk from the apartment. The fast ferry takes roughly 50 minutes each way, so it's a full day — go on the earliest boat you can."}
     ]},
@@ -634,8 +640,13 @@ jump.innerHTML = '<option value="">Jump to…</option>' +
   TRIP.map((c,i)=>`<option value="${c.id}">${i+1}. ${c.name}</option>`).join('') +
   '<option value="italiano">🇮🇹 Italian phrases</option>';
 
+const EXTRAS = [
+  {when:"9/14", what:"Flight Palermo → Naples", cost:258.94},
+  {when:"9/16", what:"Pompeii guided tour", cost:139.18}
+];
 const totalCost = TRIP.reduce((s,c)=> s + Number(c.stay.cost.replace(/[^0-9.]/g,'')), 0);
 const totalN    = TRIP.reduce((s,c)=> s + c.stay.nights, 0);
+const grand     = totalCost + EXTRAS.reduce((s,e)=> s + e.cost, 0);
 document.getElementById('plan').innerHTML =
   '<h2>Where you are, when</h2>' +
   TRIP.map((c,i)=>`<a class="leg" href="#${c.id}" style="text-decoration:none;color:inherit">
@@ -644,8 +655,15 @@ document.getElementById('plan').innerHTML =
       <span class="where">${c.name}</span>
       <span class="cost">${c.stay.cost}</span>
     </a>`).join('') +
-  `<div class="leg sum"><span class="no"></span><span class="when">${totalN} nts</span>
-     <span class="where">Lodging total</span><span class="cost">$${totalCost.toLocaleString()}</span></div>`;
+  `<div class="leg sub"><span class="no"></span><span class="when">${totalN} nts</span>
+     <span class="where">Lodging</span><span class="cost">$${totalCost.toLocaleString()}</span></div>` +
+  EXTRAS.map(e=>`<div class="leg"><span class="no"></span><span class="when">${e.when}</span>
+     <span class="where">${e.what}</span>
+     <span class="cost">$${e.cost.toFixed(2)}</span></div>`).join('') +
+  `<div class="leg sum"><span class="no"></span><span class="when">total</span>
+     <span class="where">Booked so far</span>
+     <span class="cost">$${grand.toLocaleString(undefined,{minimumFractionDigits:2})}</span></div>
+   <div class="planfoot">Transatlantic airfare not included — send me the fare and I'll add it.</div>`;
 
 document.getElementById('flights').innerHTML =
   '<h2>Flights</h2>' +
