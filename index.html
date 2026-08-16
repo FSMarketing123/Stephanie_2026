@@ -425,7 +425,8 @@ const TRIP = [
       {n:"Path of the Gods", d:"The Sentiero degli Dei, a cliff-top trail from Bomerano down to Positano. Big views, mostly downhill if you start from Agerola.", q:"Path of the Gods Positano hike"}
     ]},
     { title:"🚆 Logistics", items:[
-      {n:"Amalfi → Naples → Florence, 20 Sep", d:"Back to Naples by ferry, bus or car, then the high-speed train — Frecciarossa or Italo — to Florence, about three hours. Book train tickets ahead for the cheaper fares.", tag:"book", q:"Naples to Florence high speed train"}
+      {n:"Amalfi → Naples → Florence, 20 Sep", d:"Back to Naples by ferry, bus or car, then the high-speed train — Frecciarossa or Italo — to Florence, about three hours. Book train tickets ahead for the cheaper fares.", tag:"book", q:"Naples to Florence high speed train",
+       dist:"The timing works out: checkout here is 10:00 AM and Florence check-in isn't until 3:00 PM, but Dimora Collection will hold your bags if you arrive early. Allow 2–3 hours to get from Positano to Napoli Centrale before the train even starts."}
     ]}
   ]
 },
@@ -433,7 +434,10 @@ const TRIP = [
   id:"florence", name:"Florence", region:"Tuscany",
   intro:"The Renaissance finale — art, markets, wine windows and Tuscan food.",
   stay:{ in:"Sun 20 Sep", out:"Wed 23 Sep", nights:3, cost:"$1,094",
-         hotel:"Dimora Collection", sub:"Confirmation details not saved here yet",
+         hotel:"Dimora Collection SRL", sub:"⚠️ Still need the actual Florence street address — reply to their email and ask which property and which door.",
+         rows:[["Check-in","Sun 20 Sep, from 3:00 PM"],["Checkout","Wed 23 Sep, by 11:00 AM"],
+               ["Luggage","They'll hold bags before check-in and after checkout"],
+               ["Company","Via Tortona 21, Milano 20144 — this is their registered business address in Milan, not your apartment. Don't put it in Maps."]],
          url:"https://dimoracollection.guestybookings.com/en/properties" },
   groups:[
     { title:"🏛️ Must-See Sights & History", items:[
