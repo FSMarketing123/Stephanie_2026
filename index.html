@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12405f">
+<title>Italy 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇹</text></svg>">
+<style>
+/* ── Majolica: Vietri & Sicilian ceramic glaze ────────────────────
+   chalk white glaze ground · cobalt blue · ochre yellow           */
+:root{
+  --glaze:#f4f2ec; --tile:#fffefb; --ink:#16232c; --soft:#5f6b73;
+  --edge:#dfdbd0;
+  --blu:#175d8c; --blu-tint:#e3ecf3;
+  --ochre:#9d7318; --ochre-tint:#f4ebd6;
+  --coral:#a8452a; --coral-tint:#f6e7e1;
+  --lift:0 1px 1px rgba(22,35,44,.05), 0 8px 22px rgba(22,35,44,.06);
+  --serif:"Iowan Old Style","Charter",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --glaze:#0f1920; --tile:#17242d; --ink:#e7edf1; --soft:#95a3ac;
+    --edge:#25353f;
+    --blu:#79b6dc; --blu-tint:#14303f;
+    --ochre:#dcb264; --ochre-tint:#2c2618;
+    --coral:#e08a6d; --coral-tint:#33201a;
+    --lift:0 1px 1px rgba(0,0,0,.4), 0 8px 22px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --glaze:#0f1920; --tile:#17242d; --ink:#e7edf1; --soft:#95a3ac;
+  --edge:#25353f;
+  --blu:#79b6dc; --blu-tint:#14303f;
+  --ochre:#dcb264; --ochre-tint:#2c2618;
+  --coral:#e08a6d; --coral-tint:#33201a;
+  --lift:0 1px 1px rgba(0,0,0,.4), 0 8px 22px rgba(0,0,0,.3);
+}
+:root[data-theme="light"]{
+  --glaze:#f4f2ec; --tile:#fffefb; --ink:#16232c; --soft:#5f6b73;
+  --edge:#dfdbd0;
+  --blu:#175d8c; --blu-tint:#e3ecf3;
+  --ochre:#9d7318; --ochre-tint:#f4ebd6;
+  --coral:#a8452a; --coral-tint:#f6e7e1;
+  --lift:0 1px 1px rgba(22,35,44,.05), 0 8px 22px rgba(22,35,44,.06);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--glaze); color:var(--ink);
+  font:16px/1.55 var(--sans);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+
+/* ── Masthead: painted tile band ───────────────────────────────── */
+.masthead{
+  background:#12405f; color:#fdfbf6;
+  padding:calc(env(safe-area-inset-top) + 26px) 0 24px;
+  text-align:center; position:relative; overflow:hidden;
+}
+.masthead::after{ /* ochre glaze line, like a tile border */
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,#c8912e 0 18%,#12405f 18% 22%,#c8912e 22% 40%,#12405f 40% 44%,#c8912e 44% 100%);
+  opacity:.85;
+}
+.masthead h1{
+  margin:0;font-family:var(--serif);font-weight:400;
+  font-size:34px;line-height:1.05;letter-spacing:-.4px;
+}
+.masthead .kicker{
+  font-family:var(--mono);font-size:11px;letter-spacing:2.4px;text-transform:uppercase;
+  opacity:.72;margin-bottom:9px;
+}
+.masthead .dates{
+  margin-top:9px;font-family:var(--mono);font-size:12.5px;letter-spacing:.6px;opacity:.8;
+}
+
+/* ── Control bar ───────────────────────────────────────────────── */
+.controls{
+  position:sticky;top:0;z-index:50;
+  background:var(--glaze);border-bottom:1px solid var(--edge);
+}
+.controls .wrap{padding-top:9px;padding-bottom:9px;display:flex;gap:8px}
+select,input[type=search]{
+  -webkit-appearance:none;appearance:none;width:100%;
+  font:600 16px/1.2 var(--sans);color:var(--ink);
+  background:var(--tile);border:1px solid var(--edge);border-radius:4px;
+  padding:13px 36px 13px 12px;min-height:48px;
+}
+select{
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23175d8c' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 11px center;background-size:16px;
+  flex:1 1 58%;
+}
+input[type=search]{
+  flex:1 1 42%;font-weight:400;padding-right:12px;padding-left:34px;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f6b73' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:11px center;background-size:15px;
+}
+input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
+select:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible,button:focus-visible{
+  outline:2px solid var(--blu);outline-offset:2px;
+}
+
+/* ── Itinerary table ───────────────────────────────────────────── */
+.plan{margin-top:18px;border:1px solid var(--edge);background:var(--tile);box-shadow:var(--lift)}
+.plan h2{
+  margin:0;padding:13px 14px 11px;font-family:var(--serif);font-weight:400;font-size:19px;
+  border-bottom:1px solid var(--edge);
+}
+.leg{display:flex;align-items:baseline;gap:11px;padding:11px 14px;border-bottom:1px solid var(--edge)}
+.leg .no{
+  font-family:var(--mono);font-size:11px;font-weight:700;color:var(--blu);
+  flex:0 0 auto;width:16px;
+}
+.leg .when{font-family:var(--mono);font-size:12px;color:var(--soft);flex:0 0 76px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.leg .where{flex:1;font-weight:600;font-size:14.5px}
+.leg .cost{font-family:var(--mono);font-size:12px;color:var(--soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+.leg.sum{border-bottom:0;background:var(--blu-tint)}
+.leg.sum .where,.leg.sum .cost{color:var(--blu);font-weight:700}
+.leg.sum .when{color:var(--blu)}
+
+/* ── City ──────────────────────────────────────────────────────── */
+section{scroll-margin-top:74px;margin-top:34px}
+.city{background:var(--tile);border:1px solid var(--edge);box-shadow:var(--lift)}
+.city .pad{padding:16px 15px 15px;display:flex;gap:13px}
+.stopno{
+  flex:0 0 auto;width:34px;height:34px;background:#12405f;color:#fdfbf6;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:14px;font-weight:700;
+}
+:root[data-theme="dark"] .stopno{background:var(--blu);color:#0f1920}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stopno{background:var(--blu);color:#0f1920}}
+.city h2{margin:0;font-family:var(--serif);font-weight:400;font-size:27px;line-height:1.1;text-wrap:balance}
+.city .region{font-family:var(--mono);font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ochre);margin-bottom:3px}
+.city p.intro{margin:7px 0 0;font-size:14px;color:var(--soft)}
+
+.stay{border-top:1px solid var(--edge);background:var(--blu-tint);padding:12px 15px}
+.stay .row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;font-family:var(--mono);font-size:12.5px}
+.stay .dates{color:var(--blu);font-weight:700;letter-spacing:.2px}
+.stay .n{color:var(--soft)}
+.stay .cost{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums}
+.stay .hotel{margin-top:6px;font-size:13.5px;font-weight:700}
+.stay .sub{margin-top:2px;font-size:12.5px;color:var(--soft)}
+.stay dl{margin:9px 0 0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:12.5px}
+.stay dt{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--soft);padding-top:2px}
+.stay dd{margin:0}
+
+/* ── Flights ───────────────────────────────────────────────────── */
+.flights{margin-top:14px;border:1px solid var(--edge);background:var(--tile);box-shadow:var(--lift)}
+.flights h2{margin:0;padding:13px 14px 11px;font-family:var(--serif);font-weight:400;font-size:19px;border-bottom:1px solid var(--edge)}
+.fdir{padding:11px 14px;border-bottom:1px solid var(--edge)}
+.fdir:last-child{border-bottom:0}
+.fdir .lbl{font-family:var(--mono);font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ochre)}
+.fdir .day{font-size:14px;font-weight:700;margin-top:2px}
+.hop{display:flex;align-items:baseline;gap:9px;margin-top:9px;font-size:13px}
+.hop .code{font-family:var(--mono);font-size:10.5px;color:var(--blu);font-weight:700;flex:0 0 52px}
+.hop .path{flex:1;font-weight:600}
+.hop .time{font-family:var(--mono);font-size:11.5px;color:var(--soft);white-space:nowrap;font-variant-numeric:tabular-nums}
+.hop .sub{grid-column:2;font-size:11.5px;color:var(--soft)}
+.hopsub{margin:2px 0 0 61px;font-size:11.5px;color:var(--soft)}
+.fmeta{margin-top:9px;padding-top:8px;border-top:1px dotted var(--edge);font-size:12px;color:var(--soft)}
+
+/* ── Groups ────────────────────────────────────────────────────── */
+details.grp{background:var(--tile);border:1px solid var(--edge);border-top:0;box-shadow:var(--lift)}
+details.grp>summary{
+  list-style:none;cursor:pointer;padding:14px 15px;min-height:52px;
+  display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px;
+}
+details.grp>summary::-webkit-details-marker{display:none}
+details.grp>summary .n{
+  margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--soft);
+  border:1px solid var(--edge);padding:2px 6px;
+}
+details.grp>summary .chev{color:var(--blu);font-size:11px;transition:transform .18s}
+@media (prefers-reduced-motion:reduce){details.grp>summary .chev{transition:none}}
+details.grp[open]>summary .chev{transform:rotate(180deg)}
+
+/* ── Items ─────────────────────────────────────────────────────── */
+.item{padding:14px 15px;border-top:1px solid var(--edge)}
+.item .hd{display:flex;gap:10px;align-items:flex-start}
+.item h3{margin:0;flex:1;font-size:15.5px;line-height:1.32;font-weight:700}
+.item p{margin:6px 0 0;font-size:13.5px;line-height:1.55;color:var(--soft)}
+.star{
+  flex:0 0 auto;background:none;border:0;font-size:19px;line-height:1;cursor:pointer;
+  padding:2px 0 2px 4px;color:var(--soft);opacity:.4;transition:.15s;
+}
+@media (prefers-reduced-motion:reduce){.star{transition:none}}
+.star[aria-pressed="true"]{color:var(--ochre);opacity:1}
+.tag{
+  display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;padding:3px 6px;margin-right:7px;vertical-align:2px;
+}
+.t-must{background:var(--blu-tint);color:var(--blu)}
+.t-book{background:var(--ochre-tint);color:var(--ochre)}
+.t-check{background:var(--coral-tint);color:var(--coral)}
+.out{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.out a{
+  text-decoration:none;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.4px;
+  color:var(--blu);border:1px solid var(--edge);background:var(--glaze);
+  padding:8px 10px;min-height:34px;display:inline-flex;align-items:center;
+}
+.out a:hover{border-color:var(--blu)}
+.item.avoid{background:var(--coral-tint)}
+.item.avoid h3{color:var(--coral)}
+
+ol.prio{margin:0;padding:6px 15px 16px 36px}
+ol.prio li{margin:8px 0;font-size:14.5px}
+ol.prio li::marker{font-family:var(--mono);font-size:12px;color:var(--blu)}
+.aside{
+  margin:0 15px 16px;padding:12px 13px;background:var(--ochre-tint);
+  border-left:3px solid var(--ochre);font-size:13.5px;line-height:1.55;
+}
+.aside b{color:var(--ochre)}
+
+.foot{
+  text-align:center;color:var(--soft);font-family:var(--mono);font-size:11px;
+  letter-spacing:.5px;line-height:2;padding:38px 16px 46px;
+}
+.none{display:none;text-align:center;color:var(--soft);padding:44px 16px;font-size:14px}
+.up{
+  position:fixed;right:14px;bottom:calc(env(safe-area-inset-bottom) + 14px);z-index:60;
+  width:44px;height:44px;border:1px solid var(--edge);background:var(--tile);
+  color:var(--blu);font-size:16px;box-shadow:var(--lift);cursor:pointer;
+  display:none;align-items:center;justify-content:center;
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">Sicily · Campania · Tuscany</div>
+  <h1>Italy 2026</h1>
+  <div class="dates">9 — 23 SEPTEMBER 2026</div>
+</div>
+
+<div class="controls">
+  <div class="wrap">
+    <select id="jump" aria-label="Jump to a destination"></select>
+    <input id="q" type="search" placeholder="Search" aria-label="Search everything">
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="plan" id="plan"></div>
+  <div class="flights" id="flights"></div>
+  <main id="app"></main>
+  <div class="none" id="none">Nothing matches that. Try another word.</div>
+</div>
+
+<div class="foot">
+  Tap ☆ to save a favorite — kept on this device<br>
+  Every entry opens in Maps, photos, or search
+</div>
+
+<button class="up" id="up" aria-label="Back to top">↑</button>
+
+<script>
+/* ═══════════════════ FLIGHTS ═══════════════════ */
+const FLIGHTS = [
+{ label:"Getting there", day:"Wed 9 Sep → Thu 10 Sep",
+  hops:[
+    {code:"UA 2858", path:"Tampa → Newark", dep:"11:20a", arr:"2:00p", sub:"2h 40m · Boeing 737 MAX 9 · United Economy"},
+    {code:"UA 735",  path:"Newark → Palermo", dep:"4:25p", arr:"7:15a", sub:"8h 50m · Boeing 767-400ER · overnight, meal served"}
+  ],
+  meta:"2h 25m connection at Newark. Lands in Palermo 7:15 AM on Thursday 10 September — you can't check in at the B&B until afternoon, so plan a slow first morning." },
+{ label:"Getting home", day:"Wed 23 Sep",
+  hops:[
+    {code:"DL 9523", path:"Florence → Amsterdam", dep:"11:20a", arr:"1:30p", sub:"Seat 08A · operated by KLM Cityhopper"},
+    {code:"DL 237",  path:"Amsterdam → Tampa", dep:"2:45p", arr:"6:33p", sub:"Seat 39J · Delta Main"}
+  ],
+  meta:"1h 15m connection at Amsterdam. An 11:20 AM departure from Florence means leaving the apartment by roughly 9:00 AM." }
+];
+
+/* ═══════════════════ TRIP ═══════════════════ */
+const TRIP = [
+{
+  id:"palermo", name:"Palermo", region:"Sicily",
+  intro:"Markets, Norman palaces, street food and late nights.",
+  stay:{ in:"Thu 10 Sep", out:"Sat 12 Sep", nights:2, cost:"$390",
+         hotel:"B&B Dolce Vita", sub:"Superior Suite, 50 m² · 2 adults · breakfast included",
+         rows:[["Rate","€358 total, VAT included — Best Price Rate"]],
+         url:"https://www.bnbdolcevita.com/rooms" },
+  groups:[
+    { title:"🏛️ Sights & History", items:[
+      {n:"Palazzo dei Normanni", d:"The Norman royal palace — go for the Cappella Palatina mosaics inside. Check opening days; it closes to visitors during government sessions.", tag:"must"},
+      {n:"Chiesa del Gesù (Casa Professa)", d:"Baroque church covered wall-to-wall in marble inlay. Quietly one of the most over-the-top interiors in the city."},
+      {n:"Santa Caterina d'Alessandria", d:"Baroque church on Piazza Bellini — the rooftop terrace has great views and the monastery pastry shop is downstairs.", tag:"must"},
+      {n:"Capo Gallo Nature Reserve", d:"Protected headland north of the city, near Mondello. Coastal walking and swimming spots.", tag:"check"}
+    ]},
+    { title:"🛍️ Markets & Neighborhoods", items:[
+      {n:"Ballarò Market", d:"The big, loud, genuinely local street market. Best in the morning; great for street food.", tag:"must"},
+      {n:"Capo Market", d:"The other historic market — food, produce and stalls threading through narrow lanes."},
+      {n:"Vucciria", d:"Market by day, the center of Palermo nightlife after dark. Crowds spill into the piazza."},
+      {n:"Drinks in the historic centre", d:"Piazza Bellini and Quattro Canti for an evening aperitivo before dinner."}
+    ]},
+    { title:"🏖️ Beaches & Day Trips", items:[
+      {n:"Mondello Beach", d:"The city beach — white sand and turquoise water, easy to reach by bus from the center.", tag:"must", q:"Mondello beach Palermo"},
+      {n:"Sant'Elia, Santa Flavia", d:"Small hidden coastal village east of Palermo, reachable by train to Santa Flavia. A quiet fishing-harbor swimming spot.", q:"Sant'Elia Santa Flavia Sicily"}
+    ]},
+    { title:"🍝 Food & Sweets", items:[
+      {n:"I Segreti del Chiostro", d:"Convent pastry shop inside Santa Caterina — widely considered the best cannoli in Palermo. Get the mini cannoli filled to order.", tag:"must"},
+      {n:"Cioccolateria Lorenzo", d:"Chocolate shop stop."},
+      {n:"Osteria Nonna Dora", d:"Traditional Sicilian cooking — make a reservation.", tag:"book"},
+      {n:"Scarpetta", d:"On the list for dinner.", q:"Scarpetta restaurant Palermo"},
+      {n:"“Fore Italics” — real Sicilian food", d:"Name came through garbled in your notes — possibly Ferro di Cavallo. Worth confirming before you go.", tag:"check", q:"traditional Sicilian trattoria Palermo Ferro di Cavallo"},
+      {n:"“Makkatoboro”", d:"Name to confirm — search Palermo restaurant lists to pin this one down.", tag:"check", q:"Palermo restaurant maccaronaro"},
+      {n:"“Sanataria”", d:"Name to confirm from your notes.", tag:"check", q:"Palermo restaurant Santeria"},
+      {n:"Pizza at “Assume”", d:"Pizza spot — name needs confirming.", tag:"check", q:"best pizza Palermo"}
+    ]},
+    { title:"🌙 Nightlife", items:[
+      {n:"Seven Rooftop", d:"Rooftop garden restaurant — dinner with a view over the city. Book ahead for sunset.", tag:"book", q:"Seven Rooms Rooftop Palermo"},
+      {n:"Agave Eco Bar", d:"Nightlife spot on the list."},
+      {n:"Vucciria after dark", d:"Where the night ends up — busiest Thursday through Saturday."}
+    ]},
+    { title:"⚠️ Skip", items:[
+      {n:"Via Maqueda restaurants", d:"Noted as bad food and overpriced — a tourist-trap strip. Walk it for the atmosphere, eat somewhere else.", avoid:true}
+    ]}
+  ]
+},
+{
+  id:"castellammare", name:"Castellammare del Golfo", region:"Sicily",
+  intro:"Beach days, coves and seafood on the northwest Sicilian coast.",
+  stay:{ in:"Sat 12 Sep", out:"Mon 14 Sep", nights:2, cost:"$365",
+         hotel:"Fior Di Mandorla", sub:"Room hosted by Giardino Segreto",
+         addr:"V. Guglielmo Marconi 108, 91014 Castellammare del Golfo TP",
+         rows:[["Check-in","Sat 12 Sep, after 3:00 PM"],["Checkout","Mon 14 Sep, by 10:00 AM"]],
+         url:"https://www.airbnb.com/rooms/1434694323328877174?check_in=2026-09-12&check_out=2026-09-14&guests=1&adults=1" },
+  groups:[
+    { title:"🏖️ Beaches & Coves", items:[
+      {n:"Cala Rossa", d:"Get in the water here — the swimming stop on your list.", tag:"must"},
+      {n:"Riserva Naturale dello Zingaro", d:"Coastal nature reserve with a string of swimming coves — Cala dell'Uzzo, Cala Marinella, Cala Berretta. Entry is on foot from the north or south gate; bring water and real shoes.", tag:"check"},
+      {n:"Cala Bianca", d:"On your list to check for distance from town.", tag:"check"},
+      {n:"Cala dell'Uzzo", d:"One of the prettiest coves inside the Zingaro reserve. Check drive and walk time before committing a whole day.", tag:"check"},
+      {n:"Casa Maje Beach Club", d:"Beach club for a day or an evening by the water. Worth calling ahead even in September.", q:"Casa Maje beach club Castellammare del Golfo"}
+    ]},
+    { title:"🍽️ Eat & Drink", items:[
+      {n:"La Tonnara (Scopello)", d:"Dinner at the old tuna fishery at Tonnara di Scopello — one of the most scenic settings on this coast. Make reservations.", tag:"book", q:"La Tonnara di Scopello restaurant"},
+      {n:"La Sorgente", d:"Try the cassatelle with ricotta — the fried sweet ricotta turnover that's a western-Sicily specialty.", q:"La Sorgente Castellammare del Golfo cassatelle"},
+      {n:"Vernaci Gelateria", d:"Gelato stop. The spelling may differ locally — search will find it.", tag:"check", q:"gelateria Castellammare del Golfo"}
+    ]},
+    { title:"🚗 Getting Around", items:[
+      {n:"Distances to check", d:"Confirm drive times to Cala Bianca, Cala dell'Uzzo and the Zingaro reserve gates before planning beach days — several are 20 to 40 minutes from town and parking fills early.", tag:"check", q:"Riserva dello Zingaro entrance parking"},
+      {n:"Palermo → Castellammare", d:"About an hour by car; buses also run from Palermo. Easiest with a rental car given how spread out the beaches are.", tag:"check", q:"Palermo to Castellammare del Golfo bus"}
+    ]}
+  ]
+},
+{
+  id:"naples", name:"Naples", region:"Campania",
+  intro:"Flight over from Sicily. Base for Pompeii and Capri, and the birthplace of pizza.",
+  stay:{ in:"Mon 14 Sep", out:"Thu 17 Sep", nights:3, cost:"$512",
+         hotel:"Nova Plebiscito 1", sub:"Entire home/apt hosted by Silvano · one minute from Piazza del Plebiscito",
+         addr:"Via Pallonetto Santa Lucia 23, 80132 Naples",
+         rows:[["Check-in","Mon 14 Sep, after 4:00 PM"],["Checkout","Thu 17 Sep, by 10:00 AM"]],
+         url:"https://www.airbnb.com/rooms/1348680569126395919?guests=1&adults=1" },
+  groups:[
+    { title:"🏛️ Day Trips", items:[
+      {n:"Pompeii", d:"The buried Roman city. Half a day minimum; go early, there's almost no shade. Direct trains from Naples on the Circumvesuviana line.", tag:"must"},
+      {n:"Capri — rent a boat", d:"A private or shared boat is the best way to see the island. The sea caves and swim stops are the point, not the town shopping. Book in advance.", tag:"book", q:"Capri boat rental tour"}
+    ]},
+    { title:"🍕 Food", items:[
+      {n:"Naples pizza", d:"Napoletana pizza in its home city — worth planning one or two specific places rather than wandering.", tag:"must", q:"best pizza Naples Italy"},
+      {n:"Food tour", d:"A guided food tour covers the Spanish Quarter street food in one go — fried pizza, sfogliatella, taralli.", q:"Naples food tour"}
+    ]},
+    { title:"🚆 Logistics", items:[
+      {n:"Flight: Palermo → Naples, 14 Sep", d:"Roughly an hour in the air. Flight details still to be added.", tag:"check", q:"flights Palermo to Naples"},
+      {n:"Naples → Amalfi Coast, 17 Sep", d:"Options are the SITA bus via Sorrento, a private transfer, or the ferry. The ferry is the least stressful and the prettiest. Details still to be added.", tag:"check", q:"Naples to Positano ferry"}
+    ]}
+  ]
+},
+{
+  id:"amalfi", name:"Amalfi Coast", region:"Positano & Ravello",
+  intro:"Cliffside towns above the water — the slow part of the trip.",
+  stay:{ in:"Thu 17 Sep", out:"Sun 20 Sep", nights:3, cost:"$1,043",
+         hotel:"Casa Lucibello", sub:"Deluxe King Studio · 2 adults · prepaid through Booking.com",
+         addr:"Via G. Marconi 230, 84017 Positano",
+         rows:[["Check-in","Thu 17 Sep, 2:00 – 9:00 PM"],["Checkout","Sun 20 Sep, 6:00 – 10:00 AM"],["Property","+39 339 442 4309"]] },
+  groups:[
+    { title:"✨ Experiences", items:[
+      {n:"Cooking class", d:"An Amalfi Coast cooking class — usually a half day with a market visit, pasta making and lunch. Book early, the good ones fill up.", tag:"book", q:"Positano cooking class"},
+      {n:"Ravello", d:"Hill town above the coast with the famous garden villas, Villa Cimbrone and Villa Rufolo, and the best views on the whole coastline.", tag:"must"},
+      {n:"Beach club", d:"Positano's beach clubs sell loungers by the day on Spiaggia Grande and Fornillo. Reserve ahead.", tag:"check", q:"Positano beach club Spiaggia Grande"}
+    ]},
+    { title:"📍 Nearby", items:[
+      {n:"Positano", d:"The postcard town — vertical streets, one main beach, and a great many stairs.", tag:"must", q:"Positano Italy"},
+      {n:"Amalfi & Atrani", d:"The next towns along the coast — easy by ferry or bus.", q:"Amalfi town Italy"},
+      {n:"Path of the Gods", d:"The Sentiero degli Dei, a cliff-top trail from Bomerano down to Positano. Big views, mostly downhill if you start from Agerola.", q:"Path of the Gods Positano hike"}
+    ]},
+    { title:"🚆 Logistics", items:[
+      {n:"Amalfi → Naples → Florence, 20 Sep", d:"Back to Naples by ferry, bus or car, then the high-speed train — Frecciarossa or Italo — to Florence, about three hours. Book train tickets ahead for the cheaper fares.", tag:"book", q:"Naples to Florence high speed train"}
+    ]}
+  ]
+},
+{
+  id:"florence", name:"Florence", region:"Tuscany",
+  intro:"The Renaissance finale — art, markets, wine windows and Tuscan food.",
+  stay:{ in:"Sun 20 Sep", out:"Wed 23 Sep", nights:3, cost:"$1,094",
+         hotel:"Dimora Collection", sub:"Confirmation details not saved here yet",
+         url:"https://dimoracollection.guestybookings.com/en/properties" },
+  groups:[
+    { title:"🏛️ Must-See Sights & History", items:[
+      {n:"Florence Cathedral (Duomo)", d:"Florence's iconic cathedral, famous for Brunelleschi's massive Renaissance dome. Climbing the dome is one of the best experiences if you're comfortable with stairs.", tag:"must"},
+      {n:"Piazza del Duomo", d:"The historic square surrounding the Duomo, Giotto's Bell Tower and the Baptistery. Beautifully atmospheric at night when the crowds disappear."},
+      {n:"Galleria dell'Accademia", d:"Home of Michelangelo's David, one of the most famous sculptures of the Renaissance. Reserve a timed entry.", tag:"must"},
+      {n:"Uffizi Gallery", d:"One of the world's most important Renaissance art museums. Look for Botticelli's Birth of Venus and works by Leonardo, Michelangelo and Raphael. Book ahead.", tag:"must"},
+      {n:"Ponte Vecchio", d:"Florence's famous medieval bridge over the Arno, historically lined with jewelry shops. Great for an evening stroll.", tag:"must"},
+      {n:"Piazza della Signoria", d:"Florence's historic civic center, filled with Renaissance sculptures and right next to Palazzo Vecchio and the Uffizi."},
+      {n:"Medici Chapels", d:"The Cappelle Medicee — elaborate funerary chapels built for the powerful Medici family, with major works by Michelangelo."},
+      {n:"Basilica di Santa Maria Novella", d:"One of Florence's most important Gothic churches, with an impressive Renaissance façade and significant artworks inside."},
+      {n:"Basilica di Santa Croce", d:"Historic Franciscan basilica and burial place of famous Florentines including Michelangelo, Galileo and Machiavelli."},
+      {n:"Boboli Gardens", d:"Huge historic gardens behind Palazzo Pitti. A great place to walk through Renaissance landscaping, fountains, sculptures and terraces.", tag:"must"},
+      {n:"Piazzale Michelangelo", d:"The classic panoramic viewpoint over Florence. Go around sunset for one of the best city views.", tag:"must"}
+    ]},
+    { title:"🛍️ Markets, Shopping & Local Life", items:[
+      {n:"Mercato Centrale", d:"Florence's famous indoor food market. Great for browsing Italian specialties, meats, cheeses, pasta and wine, plus casual food upstairs."},
+      {n:"Sant'Ambrogio Market", d:"A more local-feeling market where Florentines shop for produce, cheese and meat. A good alternative to the more touristy Mercato Centrale."},
+      {n:"Cascine Market — Tuesdays", d:"Florence's large outdoor market along the Cascine park. Good for clothing, household goods, food and bargain hunting. You're in Florence Sunday to Wednesday, so Tuesday 22 September is your only window.", tag:"check"},
+      {n:"San Lorenzo Market", d:"Known for leather goods, souvenirs, clothing and tourist shopping. Fun to browse, but compare leather quality carefully."},
+      {n:"Santa Croce Market", d:"Check for local markets and events around Piazza Santa Croce — offerings vary by day.", tag:"check"},
+      {n:"Vintage shopping in Oltrarno", d:"The Oltrarno and Santo Spirito neighborhood is particularly good for vintage stores, independent boutiques, antiques and more unique shopping.", tag:"must"},
+      {n:"KIKO Milano", d:"Italian cosmetics brand if you want to browse Italian beauty products."},
+      {n:"Castello della Paneretta", d:"Historic Tuscan estate and winery outside Florence — a countryside wine experience rather than a city sightseeing stop.", tag:"check"}
+    ]},
+    { title:"🍷 Unique Florence Experiences", items:[
+      {n:"Wine Windows", d:"The buchette del vino — tiny windows built into historic buildings, traditionally used to sell wine directly to customers. Florence has hundreds. Ones to find: Babae, Cantina dei Pucci, Buchetta del Vino, Caffè Odeon, Osteria Belle Donne.", tag:"must", q:"buchette del vino wine windows Florence"},
+      {n:"Send yourself a postcard", d:"A fun little travel tradition — find a beautiful Italian stamp and postcard and mail it home to yourself.", q:"Poste Italiane Florence post office"},
+      {n:"Walk Florence late at night", d:"The Duomo and Piazza del Duomo feel completely different once the crowds disappear. A nighttime walk can be magical."},
+      {n:"Order the house wine", d:"At traditional trattorias the vino della casa is a cheap and fun way to drink local."},
+      {n:"Red Garter Club", d:"American-style bar with dancing and nightlife if you want something more energetic after dinner."}
+    ]},
+    { title:"🥪 Sandwiches & Casual Food", items:[
+      {n:"All'Antico Vinaio", d:"Famous Florentine schiacciata sandwiches piled with Italian meats, cheeses and toppings. Very popular and touristy, but a Florence classic.", tag:"must"},
+      {n:"I Fratellini", d:"Tiny historic sandwich window near the center. Great for an inexpensive sandwich and a glass of wine standing on the street."},
+      {n:"Pino's Sandwiches", d:"Popular casual sandwich spot, convenient to the historic center."},
+      {n:"Mercato Centrale food hall", d:"A good place to sample several things rather than committing to one restaurant."}
+    ]},
+    { title:"🍝 Traditional Tuscan Restaurants", items:[
+      {n:"La Giostra", d:"Upscale Tuscan restaurant known for its ravioli and bistecca alla Fiorentina.", tag:"book"},
+      {n:"Trattoria Sostanza", d:"Historic trattoria famous for its butter chicken — not Indian-style, but chicken cooked in a heroic amount of butter. A classic Florence experience. Reserve; seatings are limited.", tag:"book"},
+      {n:"Trattoria ZaZa", d:"Popular traditional Tuscan restaurant near San Lorenzo. Good for pasta, meat and classic Florentine dishes."},
+      {n:"Buca Mario", d:"Historic Florentine restaurant dating back centuries, known for traditional Tuscan dishes including lasagna.", tag:"book"},
+      {n:"Osteria Pastella", d:"Known for fresh handmade pasta prepared in-house and traditional Tuscan dishes.", tag:"book"},
+      {n:"Enoteca Vigna Nuova", d:"Wine-focused enoteca — look for fresh pasta and Tuscan wine by the glass."}
+    ]},
+    { title:"☕ Coffee & Dessert", items:[
+      {n:"Vivoli", d:"Historic gelateria and café, particularly famous for its affogato — gelato with espresso poured over it. A great afternoon stop.", tag:"must"}
+    ]},
+    { title:"🥩 What to Try", items:[
+      {n:"Bistecca alla Fiorentina", d:"Thick-cut Tuscan T-bone traditionally grilled over very high heat and served rare. Sold by weight — one steak usually feeds two or three."},
+      {n:"Schiacciata", d:"Tuscan flatbread, the base of the city's famous sandwiches."},
+      {n:"Fresh pasta", d:"Especially handmade ravioli, pappardelle and other Tuscan preparations."},
+      {n:"Affogato", d:"Vanilla or cream gelato drowned in hot espresso."},
+      {n:"Pecorino & Parmesan", d:"Tuscan and Italian cheeses make an easy market-to-room snack."},
+      {n:"Tuscan house wine", d:"The vino della casa at traditional trattorias."}
+    ]},
+    { title:"💊 Historic & Unusual", items:[
+      {n:"Officina Profumo-Farmaceutica di Santa Maria Novella", d:"One of the world's oldest pharmacies, founded by the Dominican monks of Santa Maria Novella. Today a stunning historic perfumery selling fragrances, soaps and creams — worth going in just to see the rooms.", tag:"must"}
+    ]},
+    { title:"⭐ If You Only Have a Few Days", prio:[
+      "Duomo, and climb the dome",
+      "Uffizi Gallery",
+      "Accademia and David",
+      "Ponte Vecchio",
+      "Piazzale Michelangelo at sunset",
+      "Boboli Gardens",
+      "Medici Chapels",
+      "Mercato Centrale or Sant'Ambrogio Market",
+      "Casual lunch: All'Antico Vinaio, I Fratellini or Pino's",
+      "One traditional Tuscan dinner — La Giostra, Sostanza or Buca Mario",
+      "Santa Maria Novella pharmacy",
+      "Oltrarno and Santo Spirito for shopping and dinner",
+      "Try a Florence wine window",
+      "Affogato at Vivoli"
+    ], note:"<b>Best mix:</b> prioritize the Duomo, Uffizi, Accademia, Ponte Vecchio, Piazzale Michelangelo, Boboli, the markets, wine windows and a couple of traditional Tuscan meals rather than trying to fit every restaurant on the list." }
+  ]
+}
+];
+
+/* ═══════════════════ RENDER ═══════════════════ */
+const enc = encodeURIComponent;
+const TAGS = { must:['t-must','Top pick'], book:['t-book','Book ahead'], check:['t-check','Verify'] };
+const dm = d => '9/' + d.replace(/^\w{3} /,'').replace(' Sep','');
+
+const app  = document.getElementById('app');
+const jump = document.getElementById('jump');
+
+jump.innerHTML = '<option value="">Jump to…</option>' +
+  TRIP.map((c,i)=>`<option value="${c.id}">${i+1}. ${c.name}</option>`).join('');
+
+const totalCost = TRIP.reduce((s,c)=> s + Number(c.stay.cost.replace(/[^0-9.]/g,'')), 0);
+const totalN    = TRIP.reduce((s,c)=> s + c.stay.nights, 0);
+document.getElementById('plan').innerHTML =
+  '<h2>Where you are, when</h2>' +
+  TRIP.map((c,i)=>`<a class="leg" href="#${c.id}" style="text-decoration:none;color:inherit">
+      <span class="no">${i+1}</span>
+      <span class="when">${dm(c.stay.in)}–${dm(c.stay.out)}</span>
+      <span class="where">${c.name}</span>
+      <span class="cost">${c.stay.cost}</span>
+    </a>`).join('') +
+  `<div class="leg sum"><span class="no"></span><span class="when">${totalN} nts</span>
+     <span class="where">Lodging total</span><span class="cost">$${totalCost.toLocaleString()}</span></div>`;
+
+document.getElementById('flights').innerHTML =
+  '<h2>Flights</h2>' +
+  FLIGHTS.map(f=>`<div class="fdir">
+      <div class="lbl">${f.label}</div>
+      <div class="day">${f.day}</div>
+      ${f.hops.map(h=>`<div class="hop">
+          <span class="code">${h.code}</span>
+          <span class="path">${h.path}</span>
+          <span class="time">${h.dep} → ${h.arr}</span>
+        </div>
+        <div class="hopsub">${h.sub}</div>`).join('')}
+      <div class="fmeta">${f.meta}</div>
+    </div>`).join('');
+
+let fav = {};
+try { fav = JSON.parse(localStorage.getItem('italy2026-fav')||'{}'); } catch(e){ fav = {}; }
+
+app.innerHTML = TRIP.map((city,ci)=>{
+  const s = city.stay;
+  const stayLinks = (s.url ? `<a href="${s.url}" target="_blank" rel="noopener">BOOKING</a>` : '') +
+    `<a href="https://www.google.com/maps/search/?api=1&query=${enc(s.addr ? s.addr+', Italy' : s.hotel+', '+city.name+', Italy')}" target="_blank" rel="noopener">${s.addr?'DIRECTIONS':'MAP'}</a>`;
+  const stayRows = (s.addr ? [['Address', s.addr]] : []).concat(s.rows || []);
+
+  const groups = city.groups.map((g,gi)=>{
+    let body = '';
+    if (g.prio){
+      body = '<ol class="prio">' + g.prio.map(p=>`<li>${p}</li>`).join('') + '</ol>';
+      if (g.note) body += `<div class="aside">${g.note}</div>`;
+    } else {
+      body = g.items.map(it=>{
+        const key = city.id+'|'+it.n;
+        const query = it.q || (it.n+', '+city.name+', Italy');
+        const tag = it.tag ? `<span class="tag ${TAGS[it.tag][0]}">${TAGS[it.tag][1]}</span>` : '';
+        return `<div class="item${it.avoid?' avoid':''}" data-s="${(it.n+' '+it.d).toLowerCase().replace(/["“”]/g,'')}">
+          <div class="hd">
+            <h3>${tag}${it.n}</h3>
+            <button class="star" data-k="${key}" aria-pressed="${fav[key]?'true':'false'}" aria-label="Save ${it.n}">${fav[key]?'★':'☆'}</button>
+          </div>
+          <p>${it.d}</p>
+          <div class="out">
+            <a href="https://www.google.com/maps/search/?api=1&query=${enc(query)}" target="_blank" rel="noopener">MAP</a>
+            <a href="https://www.google.com/search?tbm=isch&q=${enc(query)}" target="_blank" rel="noopener">PHOTOS</a>
+            <a href="https://www.google.com/search?q=${enc(query)}" target="_blank" rel="noopener">INFO</a>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    const count = g.prio ? g.prio.length : g.items.length;
+    return `<details class="grp"${gi===0?' open':''}>
+      <summary><span>${g.title}</span><span class="n">${count}</span><span class="chev">▼</span></summary>
+      ${body}
+    </details>`;
+  }).join('');
+
+  return `<section id="${city.id}">
+    <div class="city">
+      <div class="pad">
+        <div class="stopno">${ci+1}</div>
+        <div>
+          <div class="region">${city.region}</div>
+          <h2>${city.name}</h2>
+          <p class="intro">${city.intro}</p>
+        </div>
+      </div>
+      <div class="stay">
+        <div class="row">
+          <span class="dates">${s.in} → ${s.out}</span>
+          <span class="n">${s.nights} night${s.nights>1?'s':''}</span>
+          <span class="cost">${s.cost}</span>
+        </div>
+        <div class="hotel">${s.hotel}</div>
+        ${s.sub ? `<div class="sub">${s.sub}</div>` : ''}
+        ${stayRows.length ? '<dl>'+stayRows.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')+'</dl>' : ''}
+        <div class="out">${stayLinks}</div>
+      </div>
+    </div>
+    ${groups}
+  </section>`;
+}).join('');
+
+/* ═══════════════════ BEHAVIOR ═══════════════════ */
+jump.addEventListener('change', e=>{
+  const el = document.getElementById(e.target.value);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  e.target.selectedIndex = 0;
+});
+
+app.addEventListener('click', e=>{
+  const b = e.target.closest('.star');
+  if (!b) return;
+  const on = b.getAttribute('aria-pressed') === 'true';
+  b.setAttribute('aria-pressed', on ? 'false' : 'true');
+  b.textContent = on ? '☆' : '★';
+  if (on) delete fav[b.dataset.k]; else fav[b.dataset.k] = 1;
+  try { localStorage.setItem('italy2026-fav', JSON.stringify(fav)); } catch(e){}
+});
+
+const q = document.getElementById('q');
+const none = document.getElementById('none');
+const plan = document.getElementById('plan');
+q.addEventListener('input', ()=>{
+  const t = q.value.trim().toLowerCase();
+  plan.style.display = t ? 'none' : '';
+  let hitsAll = 0;
+  document.querySelectorAll('section').forEach(sec=>{
+    let secHits = 0;
+    sec.querySelectorAll('details.grp').forEach(g=>{
+      let hits = 0;
+      g.querySelectorAll('.item').forEach(it=>{
+        const ok = !t || it.dataset.s.includes(t);
+        it.style.display = ok ? '' : 'none';
+        if (ok) hits++;
+      });
+      if (g.querySelector('ol.prio')) { g.style.display = t ? 'none' : ''; return; }
+      g.style.display = hits ? '' : 'none';
+      if (t) g.open = hits > 0;
+      secHits += hits;
+    });
+    sec.style.display = (!t || secHits) ? '' : 'none';
+    hitsAll += secHits;
+  });
+  none.style.display = (t && !hitsAll) ? 'block' : 'none';
+});
+
+const up = document.getElementById('up');
+addEventListener('scroll', ()=>{ up.style.display = scrollY > 700 ? 'flex' : 'none'; }, {passive:true});
+up.addEventListener('click', ()=> scrollTo({top:0, behavior:'smooth'}));
+</script>
+</body>
+</html>
