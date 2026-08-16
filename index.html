@@ -289,6 +289,11 @@ const FLIGHTS = [
     {code:"UA 735",  path:"Newark → Palermo", dep:"4:25p", arr:"7:15a", sub:"8h 50m · Boeing 767-400ER · overnight, meal served"}
   ],
   meta:"2h 25m connection at Newark. Lands in Palermo 7:15 AM on Thursday 10 September — you can't check in at the B&B until afternoon, so plan a slow first morning." },
+{ label:"Sicily → Naples", day:"Mon 14 Sep",
+  hops:[
+    {code:"FR 49", path:"Palermo → Naples", dep:"5:20p", arr:"6:20p", sub:"Ryanair · 1 hour · seats 06A and 06B · Priority & 2 cabin bags each · Fast Track added · $258.94 for two"}
+  ],
+  meta:"A late departure, so Monday is a full last day in Sicily — but checkout in Castellammare is 10:00 AM. Palermo airport is only about 35 km from Castellammare, roughly a 35-minute drive, so you have hours to fill between the two. Check in online before you get to the airport; Ryanair charges a fee to do it at the desk, and they do measure cabin bags." },
 { label:"Getting home", day:"Wed 23 Sep",
   hops:[
     {code:"DL 9523", path:"Florence → Amsterdam", dep:"11:20a", arr:"1:30p", sub:"Seat 08A · operated by KLM Cityhopper"},
@@ -425,7 +430,8 @@ const TRIP = [
       {n:"Food tour", d:"A guided food tour covers the Spanish Quarter street food in one go — fried pizza, sfogliatella, taralli.", q:"Naples food tour"}
     ]},
     { title:"🚆 Logistics", items:[
-      {n:"Flight: Palermo → Naples, 14 Sep", d:"Roughly an hour in the air. Flight details still to be added.", tag:"check", q:"flights Palermo to Naples"},
+      {n:"Flight: Palermo → Naples, 14 Sep", d:"Ryanair FR49, departing 5:20 PM and landing 6:20 PM. Seats 06A and 06B, priority boarding and two cabin bags each, Fast Track added. Check in online beforehand — Ryanair charges to do it at the airport.", q:"Ryanair FR49 Palermo Naples",
+       dist:"Palermo airport is about 35 km from Castellammare, roughly a 35-minute drive. With a 10:00 AM checkout and a 5:20 PM flight, you have most of Monday free — one last swim, or lunch in Scopello on the way."},
       {n:"Naples → Amalfi Coast, 17 Sep", d:"Options are the SITA bus via Sorrento, a private transfer, or the ferry. The ferry is the least stressful and the prettiest. Details still to be added.", tag:"check", q:"Naples to Positano ferry"}
     ]}
   ]
