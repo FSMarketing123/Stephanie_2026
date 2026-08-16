@@ -198,6 +198,14 @@ details.grp[open]>summary .chev{transform:rotate(180deg)}
 .t-must{background:var(--blu-tint);color:var(--blu)}
 .t-book{background:var(--ochre-tint);color:var(--ochre)}
 .t-check{background:var(--coral-tint);color:var(--coral)}
+.dist{
+  margin-top:9px;padding:8px 10px;background:var(--ochre-tint);
+  border-left:3px solid var(--ochre);font-size:12.5px;line-height:1.5;
+}
+.dist b{
+  display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--ochre);margin-bottom:2px;
+}
 .out{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .out a{
   text-decoration:none;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.4px;
@@ -290,7 +298,8 @@ const TRIP = [
       {n:"Palazzo dei Normanni", d:"The Norman royal palace — go for the Cappella Palatina mosaics inside. Check opening days; it closes to visitors during government sessions.", tag:"must"},
       {n:"Chiesa del Gesù (Casa Professa)", d:"Baroque church covered wall-to-wall in marble inlay. Quietly one of the most over-the-top interiors in the city."},
       {n:"Santa Caterina d'Alessandria", d:"Baroque church on Piazza Bellini — the rooftop terrace has great views and the monastery pastry shop is downstairs.", tag:"must"},
-      {n:"Capo Gallo Nature Reserve", d:"Protected headland north of the city, near Mondello. Coastal walking and swimming spots.", tag:"check"}
+      {n:"Capo Gallo Nature Reserve", d:"Protected headland just past Mondello — coastal walking and rocky swimming spots rather than sand. Usually reached from the Barcarello side.", tag:"check",
+       dist:"About 14 km from the historic centre, 40–45 minutes. Easiest combined with a Mondello day rather than made its own trip."}
     ]},
     { title:"🛍️ Markets & Neighborhoods", items:[
       {n:"Ballarò Market", d:"The big, loud, genuinely local street market. Best in the morning; great for street food.", tag:"must"},
@@ -299,8 +308,10 @@ const TRIP = [
       {n:"Drinks in the historic centre", d:"Piazza Bellini and Quattro Canti for an evening aperitivo before dinner."}
     ]},
     { title:"🏖️ Beaches & Day Trips", items:[
-      {n:"Mondello Beach", d:"The city beach — white sand and turquoise water, easy to reach by bus from the center.", tag:"must", q:"Mondello beach Palermo"},
-      {n:"Sant'Elia, Santa Flavia", d:"Small hidden coastal village east of Palermo, reachable by train to Santa Flavia. A quiet fishing-harbor swimming spot.", q:"Sant'Elia Santa Flavia Sicily"}
+      {n:"Mondello Beach", d:"The city beach — white sand and turquoise water. Much of the sand is private lidos you pay for; there are free public stretches at either end.", tag:"must", q:"Mondello beach Palermo",
+       dist:"About 11 km from the historic centre. Bus 806 from Piazza Politeama takes 30–40 minutes depending on traffic; a taxi is 20–25 minutes."},
+      {n:"Sant'Elia, Santa Flavia", d:"Small hidden coastal village east of Palermo — a quiet fishing-harbor swimming spot rather than a beach.", q:"Sant'Elia Santa Flavia Sicily",
+       dist:"About 18 km east. Train from Palermo Centrale to Santa Flavia–Solunto takes roughly 20 minutes, then a short taxi or 25-minute walk down to the harbor."}
     ]},
     { title:"🍝 Food & Sweets", items:[
       {n:"I Segreti del Chiostro", d:"Convent pastry shop inside Santa Caterina — widely considered the best cannoli in Palermo. Get the mini cannoli filled to order.", tag:"must"},
@@ -332,20 +343,26 @@ const TRIP = [
          url:"https://www.airbnb.com/rooms/1434694323328877174?check_in=2026-09-12&check_out=2026-09-14&guests=1&adults=1" },
   groups:[
     { title:"🏖️ Beaches & Coves", items:[
-      {n:"Cala Rossa", d:"Get in the water here — the swimming stop on your list.", tag:"must"},
-      {n:"Riserva Naturale dello Zingaro", d:"Coastal nature reserve with a string of swimming coves — Cala dell'Uzzo, Cala Marinella, Cala Berretta. Entry is on foot from the north or south gate; bring water and real shoes.", tag:"check"},
-      {n:"Cala Bianca", d:"On your list to check for distance from town.", tag:"check"},
-      {n:"Cala dell'Uzzo", d:"One of the prettiest coves inside the Zingaro reserve. Check drive and walk time before committing a whole day.", tag:"check"},
+      {n:"Cala Rossa", d:"Get in the water here — the swimming stop on your list. Pinkish-red rock, clear water, good snorkeling. Sits at Contrada Guidaloca–Ciavoli on the road out to Scopello.", tag:"must",
+       dist:"Roughly 8 km toward Scopello — about 12–15 minutes by car. The easiest of the coves to reach."},
+      {n:"Riserva Naturale dello Zingaro", d:"Coastal nature reserve with a string of seven swimming coves. Entry is on foot only — no road runs through it. Bring water and real shoes; there is no shade and nothing to buy inside.", tag:"must",
+       dist:"South gate is about 12 km, a 20-minute drive, roughly 2 km past Scopello. That's the gate to use from here. The first cove, Cala Capreria, is a 20-minute walk in from the south gate."},
+      {n:"Cala Bianca", d:"Small white-pebble cove with turquoise water, signposted off the Scopello road near Borgo Castellazzo.", tag:"check",
+       dist:"About 10 minutes' drive toward Scopello, then roughly 700 m of unpaved track and a few minutes on foot. Most cars handle the dirt road fine, but parking is limited."},
+      {n:"Cala dell'Uzzo", d:"One of the prettiest coves in the Zingaro reserve — but it sits at the far north end, not the Scopello end.", tag:"check",
+       dist:"The catch: from the south gate it's a 7 km walk, close to 2 hours each way. It's a 10-minute walk from the north gate, but that gate is 12 km past San Vito Lo Capo — about a 1 hr 15 min drive from you. Either a full hiking day or a long drive. Cala Capreria or Cala Marinella are the realistic swims from the south gate."},
       {n:"Casa Maje Beach Club", d:"Beach club for a day or an evening by the water. Worth calling ahead even in September.", q:"Casa Maje beach club Castellammare del Golfo"}
     ]},
     { title:"🍽️ Eat & Drink", items:[
-      {n:"La Tonnara (Scopello)", d:"Dinner at the old tuna fishery at Tonnara di Scopello — one of the most scenic settings on this coast. Make reservations.", tag:"book", q:"La Tonnara di Scopello restaurant"},
+      {n:"La Tonnara (Scopello)", d:"Dinner at the old tuna fishery at Tonnara di Scopello — one of the most scenic settings on this coast. Make reservations.", tag:"book", q:"La Tonnara di Scopello restaurant",
+       dist:"About 11 km, a 20-minute drive. You'll be coming back on a dark, winding coast road, so plan the drive home."},
       {n:"La Sorgente", d:"Try the cassatelle with ricotta — the fried sweet ricotta turnover that's a western-Sicily specialty.", q:"La Sorgente Castellammare del Golfo cassatelle"},
       {n:"Vernaci Gelateria", d:"Gelato stop. The spelling may differ locally — search will find it.", tag:"check", q:"gelateria Castellammare del Golfo"}
     ]},
     { title:"🚗 Getting Around", items:[
-      {n:"Distances to check", d:"Confirm drive times to Cala Bianca, Cala dell'Uzzo and the Zingaro reserve gates before planning beach days — several are 20 to 40 minutes from town and parking fills early.", tag:"check", q:"Riserva dello Zingaro entrance parking"},
-      {n:"Palermo → Castellammare", d:"About an hour by car; buses also run from Palermo. Easiest with a rental car given how spread out the beaches are.", tag:"check", q:"Palermo to Castellammare del Golfo bus"}
+      {n:"You need a car here", d:"Every beach worth going to is on the same road southwest out of town toward Scopello. Cala Rossa at roughly 8 km, Cala Bianca around 10 minutes out, the Zingaro south gate at 12 km, and Scopello itself at 11 km — all within a 20-minute drive of the apartment, all strung along one route. Without a car you're limited to the town beach.", tag:"check", q:"car rental Castellammare del Golfo"},
+      {n:"Parking fills early", d:"The Zingaro south gate lot and the Cala Bianca dirt track both fill by mid-morning in season. Arriving before 9:30 makes the difference between parking at the gate and parking a long walk away.", tag:"check", q:"Riserva dello Zingaro entrance parking"},
+      {n:"Palermo → Castellammare", d:"About an hour by car on the A29. Buses also run from Palermo, but given the beaches are spread along one road out of town, picking up a rental car for these two days is the difference between seeing the coves and not.", tag:"check", q:"Palermo to Castellammare del Golfo bus"}
     ]}
   ]
 },
@@ -359,8 +376,10 @@ const TRIP = [
          url:"https://www.airbnb.com/rooms/1348680569126395919?guests=1&adults=1" },
   groups:[
     { title:"🏛️ Day Trips", items:[
-      {n:"Pompeii", d:"The buried Roman city. Half a day minimum; go early, there's almost no shade. Direct trains from Naples on the Circumvesuviana line.", tag:"must"},
-      {n:"Capri — rent a boat", d:"A private or shared boat is the best way to see the island. The sea caves and swim stops are the point, not the town shopping. Book in advance.", tag:"book", q:"Capri boat rental tour"}
+      {n:"Pompeii", d:"The buried Roman city. Half a day minimum; go early, there's almost no shade and September afternoons are still hot.", tag:"must",
+       dist:"About 25 km southeast. From the apartment, walk or take the metro to Napoli Garibaldi (10–15 min), then the Circumvesuviana toward Sorrento to Pompei Scavi — roughly 35–40 minutes. Budget about an hour door to gate."},
+      {n:"Capri — rent a boat", d:"A private or shared boat is the best way to see the island. The sea caves and swim stops are the point, not the town shopping. Book in advance.", tag:"book", q:"Capri boat rental tour",
+       dist:"Ferries leave from Molo Beverello, about a 15-minute walk from the apartment. The fast ferry takes roughly 50 minutes each way, so it's a full day — go on the earliest boat you can."}
     ]},
     { title:"🍕 Food", items:[
       {n:"Naples pizza", d:"Napoletana pizza in its home city — worth planning one or two specific places rather than wandering.", tag:"must", q:"best pizza Naples Italy"},
@@ -382,8 +401,10 @@ const TRIP = [
   groups:[
     { title:"✨ Experiences", items:[
       {n:"Cooking class", d:"An Amalfi Coast cooking class — usually a half day with a market visit, pasta making and lunch. Book early, the good ones fill up.", tag:"book", q:"Positano cooking class"},
-      {n:"Ravello", d:"Hill town above the coast with the famous garden villas, Villa Cimbrone and Villa Rufolo, and the best views on the whole coastline.", tag:"must"},
-      {n:"Beach club", d:"Positano's beach clubs sell loungers by the day on Spiaggia Grande and Fornillo. Reserve ahead.", tag:"check", q:"Positano beach club Spiaggia Grande"}
+      {n:"Ravello", d:"Hill town above the coast with the famous garden villas, Villa Cimbrone and Villa Rufolo, and the best views on the whole coastline.", tag:"must",
+       dist:"Only about 15 km, but the coast road makes it 50–60 minutes by car. By bus it's a SITA to Amalfi then a change up to Ravello — closer to 1.5 hours. Worth a full day, not a quick trip."},
+      {n:"Beach club", d:"Positano's beach clubs sell loungers by the day on Spiaggia Grande and Fornillo. Reserve ahead.", tag:"check", q:"Positano beach club Spiaggia Grande",
+       dist:"Via Marconi is the upper road, so the beach is straight downhill — roughly 10–15 minutes of stairs going down and a genuinely steep climb coming back. There are local buses up if you'd rather not walk it twice."}
     ]},
     { title:"📍 Nearby", items:[
       {n:"Positano", d:"The postcard town — vertical streets, one main beach, and a great many stairs.", tag:"must", q:"Positano Italy"},
@@ -423,7 +444,8 @@ const TRIP = [
       {n:"Santa Croce Market", d:"Check for local markets and events around Piazza Santa Croce — offerings vary by day.", tag:"check"},
       {n:"Vintage shopping in Oltrarno", d:"The Oltrarno and Santo Spirito neighborhood is particularly good for vintage stores, independent boutiques, antiques and more unique shopping.", tag:"must"},
       {n:"KIKO Milano", d:"Italian cosmetics brand if you want to browse Italian beauty products."},
-      {n:"Castello della Paneretta", d:"Historic Tuscan estate and winery outside Florence — a countryside wine experience rather than a city sightseeing stop.", tag:"check"}
+      {n:"Castello della Paneretta", d:"Historic Chianti Classico winery built around a medieval watchtower, at Via della Paneretta 35 in Barberino Tavarnelle. A countryside wine experience rather than a city sightseeing stop.", tag:"check",
+       dist:"About 45 km south of Florence — a 45–50 minute drive into Chianti. There's no practical public transport, so this needs a rental car or a booked tour, and it takes most of a day out of your three."}
     ]},
     { title:"🍷 Unique Florence Experiences", items:[
       {n:"Wine Windows", d:"The buchette del vino — tiny windows built into historic buildings, traditionally used to sell wine directly to customers. Florence has hundreds. Ones to find: Babae, Cantina dei Pucci, Buchetta del Vino, Caffè Odeon, Osteria Belle Donne.", tag:"must", q:"buchette del vino wine windows Florence"},
@@ -543,6 +565,7 @@ app.innerHTML = TRIP.map((city,ci)=>{
             <button class="star" data-k="${key}" aria-pressed="${fav[key]?'true':'false'}" aria-label="Save ${it.n}">${fav[key]?'★':'☆'}</button>
           </div>
           <p>${it.d}</p>
+          ${it.dist ? `<div class="dist"><b>From your stay</b>${it.dist}</div>` : ''}
           <div class="out">
             <a href="https://www.google.com/maps/search/?api=1&query=${enc(query)}" target="_blank" rel="noopener">MAP</a>
             <a href="https://www.google.com/search?tbm=isch&q=${enc(query)}" target="_blank" rel="noopener">PHOTOS</a>
