@@ -247,7 +247,19 @@ details.grp[open]>summary{border-bottom:1px solid var(--edge)}
 .ph{padding:14px 17px;border-top:1px solid var(--hair)}
 .ph:first-of-type{border-top:0}
 .ph .en{font-size:12.5px;color:var(--soft);margin-bottom:4px}
-.ph .it{font-family:var(--serif);font-size:21px;line-height:1.2;font-weight:400;letter-spacing:-.2px}
+.itrow{display:flex;align-items:center;gap:11px}
+.ph .it{font-family:var(--serif);font-size:21px;line-height:1.2;font-weight:400;letter-spacing:-.2px;flex:1}
+.speak{
+  flex:0 0 auto;width:38px;height:38px;padding:0;cursor:pointer;
+  background:var(--card);border:1px solid var(--edge);border-radius:50%;
+  color:var(--rhino);display:flex;align-items:center;justify-content:center;
+  transition:.18s ease;
+}
+.speak:hover{border-color:var(--rhino);background:var(--rhino-tint)}
+.speak.speaking{background:var(--lemon);border-color:var(--lemon);color:#4d3a05}
+.speak svg{display:block}
+@media (prefers-reduced-motion:reduce){.speak{transition:none}}
+body.nospeech .speak{display:none}
 .ph .say{font-family:var(--mono);font-size:10.5px;letter-spacing:1.4px;color:var(--lemon-deep);margin-top:5px;text-transform:uppercase}
 .ph .tip{margin-top:7px;font-size:12.5px;color:var(--soft);font-style:italic;line-height:1.6}
 .headsup{padding:15px 17px;border-top:1px solid var(--hair)}
@@ -789,7 +801,7 @@ app.insertAdjacentHTML('beforeend', `<section id="italiano">
       <div>
         <div class="region">Say it in Italian</div>
         <h2>Phrases that actually come up</h2>
-        <p class="intro">Enough to order, ask directions and be polite. Say the stressed CAPS a touch harder and you'll be understood.</p>
+        <p class="intro">Enough to order, ask directions and be polite. Say the stressed CAPS a touch harder and you'll be understood — or tap the speaker to hear it spoken.</p>
       </div>
     </div>
   </div>
@@ -797,7 +809,12 @@ app.insertAdjacentHTML('beforeend', `<section id="italiano">
       <summary><span>${g.title}</span><span class="n">${g.items.length}</span><span class="chev">▼</span></summary>
       ${g.items.map(p=>`<div class="ph item" data-s="${(p.en+' '+p.it+' '+(p.tip||'')).toLowerCase().replace(/["“”']/g,'')}">
           <div class="en">${p.en}</div>
-          <div class="it">${p.it}</div>
+          <div class="itrow">
+            <div class="it">${p.it}</div>
+            <button class="speak" data-say="${p.it.replace(/"/g,'&quot;')}" aria-label="Hear how to say ${p.en.replace(/"/g,'&quot;')}">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.6a4.5 4.5 0 0 1 0 6.8"/><path d="M18.6 5.5a9 9 0 0 1 0 13"/></svg>
+            </button>
+          </div>
           <div class="say">${p.say}</div>
           ${p.tip ? `<div class="tip">${p.tip}</div>` : ''}
         </div>`).join('')}
@@ -810,6 +827,35 @@ app.insertAdjacentHTML('beforeend', `<section id="italiano">
   </details>
 </section>`);
 
+/* ── Speech ── */
+const canSpeak = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+if (!canSpeak) document.body.classList.add('nospeech');
+let itVoice = null;
+function pickVoice(){
+  const v = speechSynthesis.getVoices();
+  itVoice = v.find(x => x.lang === 'it-IT') || v.find(x => (x.lang||'').toLowerCase().startsWith('it')) || null;
+}
+if (canSpeak){
+  pickVoice();
+  speechSynthesis.addEventListener('voiceschanged', pickVoice);
+}
+let speakingBtn = null;
+function say(btn){
+  if (!canSpeak) return;
+  speechSynthesis.cancel();
+  if (speakingBtn) speakingBtn.classList.remove('speaking');
+  if (speakingBtn === btn){ speakingBtn = null; return; }
+  const u = new SpeechSynthesisUtterance(btn.dataset.say.replace(/…/g,'').trim());
+  u.lang = 'it-IT';
+  if (itVoice) u.voice = itVoice;
+  u.rate = 0.85;
+  btn.classList.add('speaking');
+  speakingBtn = btn;
+  const done = () => { btn.classList.remove('speaking'); if (speakingBtn === btn) speakingBtn = null; };
+  u.onend = done; u.onerror = done;
+  speechSynthesis.speak(u);
+}
+
 /* ═══════════════════ BEHAVIOR ═══════════════════ */
 jump.addEventListener('change', e=>{
   const el = document.getElementById(e.target.value);
@@ -818,6 +864,8 @@ jump.addEventListener('change', e=>{
 });
 
 app.addEventListener('click', e=>{
+  const sp = e.target.closest('.speak');
+  if (sp){ say(sp); return; }
   const b = e.target.closest('.star');
   if (!b) return;
   const on = b.getAttribute('aria-pressed') === 'true';
