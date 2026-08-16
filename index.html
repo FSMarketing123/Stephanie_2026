@@ -487,7 +487,13 @@ const TRIP = [
                ["Luggage","They'll hold bags before check-in and after checkout"]],
          url:"https://dimoracollection.guestybookings.com/en/properties" },
   groups:[
+    { title:"🍇 Wine Country", items:[
+      {n:"Tuscany Wine Safari — Mon 21 Sep, 9:00 AM", d:"Booked and confirmed. Small-group full-day wine tasting tour out of Florence, lunch included. $360.88 for two, $180.44 each. A full day, so treat Monday as gone from your Florence sightseeing.", tag:"booked", q:"Small Group Wine Safaris Tuscany wine tasting tour from Florence",
+       dist:"Departs from central Florence, an easy walk from Piazza dei Giuochi. Confirm the exact meeting point and time on your voucher — most Chianti tours leave from near Santa Maria Novella station."},
+      {n:"This makes Paneretta redundant", d:"Your booked safari is a Chianti wine day with lunch, which is essentially what a visit to Castello della Paneretta would have been. No need to plan both — keep Paneretta as a backup only if the tour falls through.", q:"Chianti Classico wine region Tuscany"}
+    ]},
     { title:"🏛️ Must-See Sights & History", items:[
+      {n:"Read this before you plan the days", d:"The Uffizi and the Accademia are both closed every Monday — so your Monday wine safari is well timed, it costs you nothing museum-wise. But that leaves Sunday afternoon and Tuesday as your only museum days, and you fly out Wednesday morning. Book the Uffizi and Accademia for Tuesday 22 Sep with timed entries, and use Sunday afternoon for things that don't need tickets: the Duomo square, Ponte Vecchio, Oltrarno, Piazzale Michelangelo at sunset. Note Tuesday is also the one Cascine market day — you can't do everything, so pick.", tag:"must", q:"Uffizi Accademia Florence opening hours"},
       {n:"Florence Cathedral (Duomo)", d:"Florence's iconic cathedral, famous for Brunelleschi's massive Renaissance dome. Climbing the dome is one of the best experiences if you're comfortable with stairs.", tag:"must"},
       {n:"Piazza del Duomo", d:"The historic square surrounding the Duomo, Giotto's Bell Tower and the Baptistery. Beautifully atmospheric at night when the crowds disappear."},
       {n:"Galleria dell'Accademia", d:"Home of Michelangelo's David, one of the most famous sculptures of the Renaissance. Reserve a timed entry.", tag:"must"},
@@ -647,7 +653,8 @@ jump.innerHTML = '<option value="">Jump to…</option>' +
 
 const EXTRAS = [
   {when:"9/14", what:"Flight Palermo → Naples", cost:258.94},
-  {when:"9/16", what:"Pompeii guided tour", cost:139.18}
+  {when:"9/16", what:"Pompeii guided tour", cost:139.18},
+  {when:"9/21", what:"Tuscany wine safari", cost:360.88}
 ];
 const totalCost = TRIP.reduce((s,c)=> s + Number(c.stay.cost.replace(/[^0-9.]/g,'')), 0);
 const totalN    = TRIP.reduce((s,c)=> s + c.stay.nights, 0);
